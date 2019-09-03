@@ -3,4 +3,3 @@
 export(ChIPseqMotifMatch)
 exportClasses(ChIPseqMotifMatch)
 import(methods)
-import(org.Hs.eg.db)

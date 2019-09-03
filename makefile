@@ -9,7 +9,7 @@ install:
 	(cd ..; R CMD INSTALL ChIPseqMotifMatch)
 
 check:
-	(cd ..; R CMD check `ls -t ChIPseqMotifMatch) | head -1`)
+	(cd ..; R CMD check --ignore-vignettes --no-manual `ls -t ChIPseqMotifMatch_* | head -1`)
 
 test:
 	for x in inst/unitTests/test_*.R; do echo $$x; R -f $$x; done

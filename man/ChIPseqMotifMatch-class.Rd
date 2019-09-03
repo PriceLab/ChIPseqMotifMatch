@@ -9,6 +9,11 @@
 \usage{
 ChIPseqMotifMatch(bamFilename, quiet = TRUE)
 }
+\arguments{
+\item{bamFilename}{character}
+
+\item{quiet}{logical}
+}
 \value{
 An object of the ChIPseqMotifMatch class
 }

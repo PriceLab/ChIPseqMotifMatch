@@ -1,6 +1,5 @@
 #----------------------------------------------------------------------------------------------------
 #' @import methods
-#' @import org.Hs.eg.db
 #'
 #' @title ChIPseqMotifMatch-class
 #'
@@ -24,6 +23,9 @@
 #'   where ChIP hits have been called by MACS2
 #'
 #' @rdname ChIPseqMotifMatch-class
+#'
+#' @param bamFilename character
+#' @param quiet logical
 #'
 #' @export
 #'
