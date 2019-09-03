@@ -17,6 +17,7 @@ test_constructor <- function()
    message(sprintf("--- test_constructor"))
 
    checkTrue(all(c("ChIPseqMotifMatch") %in% is(csmm)))
+   checkEquals(getBamFilename(csmm), bamFilename)
 
 } # test_constructor
 #------------------------------------------------------------------------------------------------------------------------

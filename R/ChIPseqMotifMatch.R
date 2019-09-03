@@ -16,6 +16,8 @@
                                   ))
 
 #----------------------------------------------------------------------------------------------------
+setGeneric('getBamFilename', signature='obj', function(obj) standardGeneric('getBamFilename'))
+#----------------------------------------------------------------------------------------------------
 #' Define an object of class ChIPseqMotifMatch
 #'
 #' @description
@@ -37,4 +39,20 @@ ChIPseqMotifMatch <- function(bamFilename, quiet=TRUE)
    .ChIPseqMotifMatch(bamFilename=bamFilename, quiet=quiet)
 
 } # ChIPseqMotifMatch, the constructor
+#----------------------------------------------------------------------------------------------------
+#' Get all the name of the bamfile
+#'
+#' @rdname getBamFilename
+#' @aliases getBamFilename
+#'
+#' @param obj An object of class ChIPseqMotifMatch
+#'
+#' @export
+
+setMethod('getBamFilename',  'ChIPseqMotifMatch',
+
+     function(obj){
+       obj@bamFilename
+       })
+
 #----------------------------------------------------------------------------------------------------
