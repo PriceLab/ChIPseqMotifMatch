@@ -1,0 +1,14 @@
+Package: ChIPseqMotifMatch
+Title: Assess motif match in ChIP-seq bam fiels
+Date: 2019-09-03
+Version: 1.0.0
+Author: Paul Shannon, Mariam Benazouz
+Maintainer: Paul Shannon <pshannon@systemsbiology.org>
+Description:  Survey some or all of a bam file, scoring pwm motif match to sequence
+  where ChIP hits have been called by MACS2
+Imports: methods
+Depends: R (>= 3.6.0)
+License: Apache 2.0
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.1.1
