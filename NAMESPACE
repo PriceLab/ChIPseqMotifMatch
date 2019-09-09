@@ -2,5 +2,8 @@
 
 export(ChIPseqMotifMatch)
 exportClasses(ChIPseqMotifMatch)
+exportMethods(calculateNarrowPeaks)
 exportMethods(getBamFilename)
+exportMethods(getRegionsOfInterest)
+exportMethods(setRegionsOfInterest)
 import(methods)
