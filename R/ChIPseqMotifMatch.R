@@ -118,6 +118,8 @@ setMethod('calculateNarrowPeaks',  'ChIPseqMotifMatch',
 
      function(obj){
         stopifnot(nrow(obj@state$roi) >= 1)
+        print("Hello, I am here!")
+
            # mariam: use all your magic and good existing code to implement this method!
            # i offer a simple placeholder for now, returning an empty data.frame
         return(data.frame())
