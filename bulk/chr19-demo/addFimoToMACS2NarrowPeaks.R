@@ -25,7 +25,7 @@ runTests <- function()
 # 1e-4 is the traditional FIMO pValue threshold: only motif-to-sequence matches better than this
 # are returned.  we find that loosening this to at least 1e-3 is needed to find motifs in high-scoring
 # MACS2-called narrow peaks.
-addFimoToNarrowPeaks <- function(chromosome, fimo.threshold, numberOfPeaksToConsider=-1, plot=FALSE)
+addFimoToNarrowPeaks <- function(tbl.narrowPeaks, chromosome, fimo.threshold, numberOfPeaksToConsider=-1, plot=FALSE)
 {
    tbl.np <- subset(tbl.narrowPeaks, chrom==chromosome)
 
@@ -90,7 +90,7 @@ test_addFimoToNarrowPeaks <- function()
 {
    printf("--- test_addFimoToNarrowPeaks")
 
-   tbl.10.3 <- addFimoToNarrowPeaks("chr19", 1e-3, 10)
+   tbl.10.3 <- addFimoToNarrowPeaks(tbl.narrowPeaks, "chr19", 1e-3, 10)
 
    checkEquals(dim(tbl.10.3), c(10,19))
 
