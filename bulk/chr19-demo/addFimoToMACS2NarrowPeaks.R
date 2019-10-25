@@ -1,6 +1,8 @@
 library(MotifDb)
 source("fimoBatchTools.R")
 library(igvR)
+library(phastCons100way.UCSC.hg38); phast.100 <- phastCons100way.UCSC.hg38
+library(phastCons7way.UCSC.hg38); phast.7 <- phastCons7way.UCSC.hg38
 #------------------------------------------------------------------------------------------------------------------------
 # a convenience function
 printf <- function(...) print(noquote(sprintf(...)))
@@ -90,12 +92,24 @@ test_addFimoToNarrowPeaks <- function()
 {
    printf("--- test_addFimoToNarrowPeaks")
 
-   tbl.10.3 <- addFimoToNarrowPeaks(tbl.narrowPeaks, "chr19", 1e-3, 10)
+   tbl.10.3 <- addFimoToNarrowPeaks(tbl.narrowPeaks, "chr19", 1e-2, 10)
 
    checkEquals(dim(tbl.10.3), c(10,19))
 
 
-
 } # test_addFimoToNarrowPeaks
+#------------------------------------------------------------------------------------------------------------------------
+addConserverationScores <- function(chrom, start, end)
+{
+   tbl.try2 <- subset(tbl.10.3, !is.na(motif.start))
+   gr.try2 <- with(tbl.try2, GRanges(seqnames=chrom, IRanges(start=motif.start, end=motif.end)))
+   gscores(phast.7, gr.try2)
+   tbl.phast7 <- as.data.frame(gscores(phast.7, gr.try2))
+   tbl.merged <- merge(tbl.10.3, tbl.phast7, by.x="motif.start", by.y="start", all.x=TRUE)
+   grep("default", colnames(tbl.merged))
+   colnames(tbl.merged)[24] <- "phast7"
+   tbl.merged <- tbl.merged[order(tbl.merged$start),]
+
+} # addConservationScores
 #------------------------------------------------------------------------------------------------------------------------
 
