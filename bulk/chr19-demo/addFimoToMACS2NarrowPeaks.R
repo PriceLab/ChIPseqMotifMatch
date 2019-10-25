@@ -109,7 +109,16 @@ addConserverationScores <- function(chrom, start, end)
    grep("default", colnames(tbl.merged))
    colnames(tbl.merged)[24] <- "phast7"
    tbl.merged <- tbl.merged[order(tbl.merged$start),]
-
+   
+ #add the phast.100 column
+  gscores(phast.100, gr.try2)
+  tbl.phast100 <- as.data.frame(gscores(phast.100, gr.try2))
+  tbl.merged <- merge(tbl.merged, tbl.phast100, by.x="motif.start", by.y="start", all.x=TRUE)
+  grep("default", colnames(tbl.merged))
+  colnames(tbl.merged)[29] <- "phast100" #renaming the column from "default" to "phast100" 
+  tbl.merged <- tbl.merged[order(tbl.merged$start),]
+  head(tbl.merged) 
+   
 } # addConservationScores
 #------------------------------------------------------------------------------------------------------------------------
 
