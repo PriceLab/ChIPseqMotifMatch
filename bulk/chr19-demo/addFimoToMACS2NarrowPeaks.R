@@ -3,6 +3,9 @@ source("fimoBatchTools.R")
 library(igvR)
 library(phastCons100way.UCSC.hg38); phast.100 <- phastCons100way.UCSC.hg38
 library(phastCons7way.UCSC.hg38); phast.7 <- phastCons7way.UCSC.hg38
+
+library(phastCons100way.UCSC.hg19); phast.100.hg19 <- phastCons100way.UCSC.hg19 #just in case you need hg19
+
 #------------------------------------------------------------------------------------------------------------------------
 # a convenience function
 printf <- function(...) print(noquote(sprintf(...)))
