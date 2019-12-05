@@ -11,10 +11,10 @@ library(phastCons100way.UCSC.hg19); phast.100.hg19 <- phastCons100way.UCSC.hg19 
 printf <- function(...) print(noquote(sprintf(...)))
 #------------------------------------------------------------------------------------------------------------------------
 if(!exists("tbl.narrowPeaks")){
-   tbl.narrowPeaks <- read.table("demo_peaks.narrowPeak", sep="\t", as.is=TRUE)
-   colnames(tbl.narrowPeaks) <- c("chrom", "start", "end", "name", "score", "strand", "foldChange",
-                                  "pScore", "qScore", "summitPos")
-   }
+  tbl.narrowPeaks <- read.table("ctcf__peaks.narrowPeak", sep="\t", as.is=TRUE)
+  colnames(tbl.narrowPeaks) <- c("chrom", "start", "end", "name", "score", "strand", "foldChange",
+                                 "pScore", "qScore", "summitPos")
+}
 
 if(!file.exists("ctcf-human.meme")){
    motif <- query(MotifDb, c("ctcf", "sapiens", "jaspar2018", "MA0139"))
@@ -102,13 +102,13 @@ test_addFimoToNarrowPeaks <- function()
 
 } # test_addFimoToNarrowPeaks
 #------------------------------------------------------------------------------------------------------------------------
-addConserverationScores <- function(chrom, start, end)
+addConserverationScores <- function(chrom, start, end, tbl)
 {
-   tbl.try2 <- subset(tbl.10.3, !is.na(motif.start))
+   tbl.try2 <- subset(tbl, !is.na(motif.start))
    gr.try2 <- with(tbl.try2, GRanges(seqnames=chrom, IRanges(start=motif.start, end=motif.end)))
    gscores(phast.7, gr.try2)
    tbl.phast7 <- as.data.frame(gscores(phast.7, gr.try2))
-   tbl.merged <- merge(tbl.10.3, tbl.phast7, by.x="motif.start", by.y="start", all.x=TRUE)
+   tbl.merged <- merge(tbl, tbl.phast7, by.x="motif.start", by.y="start", all.x=TRUE)
    grep("default", colnames(tbl.merged))
    colnames(tbl.merged)[24] <- "phast7"
    tbl.merged <- tbl.merged[order(tbl.merged$start),]
@@ -131,7 +131,6 @@ tbl.chrom1<-addConserverationScores(chrom="chr1", start=1, end=NA,tbl.10.4 )
 #chrom2
 tbl.10.5 <- addFimoToNarrowPeaks(tbl.narrowPeaks, "chr2", 1e-2, 10)
 tbl.chrom2<-addConserverationScores(chrom="chr2", start=1, end=NA,tbl.10.5 )
-tbl.chrom2<-addConserverationScores(chrom=gsub("2","chr2",chrom), start=1, end=NA,tbl.10.5 )
 
 tbl.combined<- rbind(tbl.chrom1, tbl.chrom2) #combines the two tables into one table
 
