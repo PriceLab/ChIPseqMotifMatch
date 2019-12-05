@@ -124,4 +124,32 @@ addConserverationScores <- function(chrom, start, end)
    
 } # addConservationScores
 #------------------------------------------------------------------------------------------------------------------------
+#chrom1
+if(!exists("tbl.narrowPeaks")){
+  tbl.narrowPeaks <- read.table("ctcf__peaks.narrowPeak", sep="\t", as.is=TRUE)
+  colnames(tbl.narrowPeaks) <- c("chrom", "start", "end", "name", "score", "strand", "foldChange",
+                                 "pScore", "qScore", "summitPos")
+}
 
+if(!file.exists("ctcf-human.meme")){
+  motif <- query(MotifDb, c("ctcf", "sapiens", "jaspar2018", "MA0139"))
+  export(motif, con="ctcf-human.meme", format="meme")
+}
+
+tbl.10.4 <- addFimoToNarrowPeaks(tbl.narrowPeaks, "chr1", 1e-2, 10)
+tbl.chrom1<-addConserverationScores(chrom="chr1", start=1, end=NA,tbl.10.4 )
+
+#chrom2
+tbl.10.5 <- addFimoToNarrowPeaks(tbl.narrowPeaks, "chr2", 1e-2, 10)
+tbl.chrom2<-addConserverationScores(chrom="chr2", start=1, end=NA,tbl.10.5 )
+tbl.chrom2<-addConserverationScores(chrom=gsub("2","chr2",chrom), start=1, end=NA,tbl.10.5 )
+
+tbl.combined<- rbind(tbl.chrom1, tbl.chrom2) #combines the two tables into one table
+
+chrom="chr2"
+for (i in 3:22) { #how to combine the rest of the chromosomes in the table
+  tbl.10.i <- addFimoToNarrowPeaks(tbl.narrowPeaks, gsub("2",i,chrom), 1e-2, 10)
+  tbl.chrom.i<-addConserverationScores(chrom=gsub("2",i,chrom), start=1, end=NA,tbl.10.i)
+  tbl.combined<- rbind(tbl.combined, tbl.chrom.i)
+}
+tbl.combined
