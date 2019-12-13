@@ -141,3 +141,6 @@ for (i in 3:22) { #how to combine the rest of the chromosomes in the table
   tbl.combined<- rbind(tbl.combined, tbl.chrom.i)
 }
 tbl.combined
+
+new.tbl<-na.exclude(tbl.combined)
+cor(new.tbl$phast7, new.tbl$phast100)
