@@ -125,18 +125,18 @@ addConserverationScores <- function(chrom, start, end, tbl)
 } # addConservationScores
 #------------------------------------------------------------------------------------------------------------------------
 #chrom1
-tbl.10.4 <- addFimoToNarrowPeaks(tbl.narrowPeaks, "chr1", 1e-2, 10)
+tbl.10.4 <- addFimoToNarrowPeaks(tbl.narrowPeaks, "chr1", 1e-1, 10)
 tbl.chrom1<-addConserverationScores(chrom="chr1", start=1, end=NA,tbl.10.4 )
 
 #chrom2
-tbl.10.5 <- addFimoToNarrowPeaks(tbl.narrowPeaks, "chr2", 1e-2, 10)
+tbl.10.5 <- addFimoToNarrowPeaks(tbl.narrowPeaks, "chr2", 1e-1, 10)
 tbl.chrom2<-addConserverationScores(chrom="chr2", start=1, end=NA,tbl.10.5 )
 
 tbl.combined<- rbind(tbl.chrom1, tbl.chrom2) #combines the two tables into one table
 
 chrom="chr2"
 for (i in 3:22) { #how to combine the rest of the chromosomes in the table
-  tbl.10.i <- addFimoToNarrowPeaks(tbl.narrowPeaks, gsub("2",i,chrom), 1e-2, 10)
+  tbl.10.i <- addFimoToNarrowPeaks(tbl.narrowPeaks, gsub("2",i,chrom), 1e-1, 10)
   tbl.chrom.i<-addConserverationScores(chrom=gsub("2",i,chrom), start=1, end=NA,tbl.10.i)
   tbl.combined<- rbind(tbl.combined, tbl.chrom.i)
 }
