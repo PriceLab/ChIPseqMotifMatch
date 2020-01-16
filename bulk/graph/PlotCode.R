@@ -1,6 +1,4 @@
 source("AddFIMOtoMACS2NarrowPeaks.R")
-#chrom1
-#if(!exists("tbl.narrowPeaks")){
 tbl.narrowPeaks <- read.table("ctcf__peaks.narrowPeak", sep="\t", as.is=TRUE)
 
 colnames(tbl.narrowPeaks) <- c("chrom", "start", "end", "name", "score", "strand", "foldChange",
