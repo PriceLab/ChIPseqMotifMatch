@@ -25,6 +25,6 @@ for (i in 3:22) { #how to combine the rest of the chromosomes in the table
 } 
 tbl.combined
 
-yaxis.before=tbl.combined$motif.p.value
-yaxis=-log10(yaxis.before)
-plot(tbl.combined$score, yaxis, main="GSM749704 ChIPseq CTCF- best FIMO match", ylab="-log10FIMO", xlab="MACS2 ChIP narrow peak score", col= ifelse(yaxis < 4, "red", ifelse(yaxis >= 4, "black", "black")))
+yaxis=tbl.combined$motif.p.value
+yaxis.logScale=-log10(yaxis)
+plot(tbl.combined$score, yaxis.logScale, main="GSM749704 ChIPseq CTCF- best FIMO match", ylab="-log10FIMO", xlab="MACS2 ChIP narrow peak score", col= ifelse(yaxis < 4, "red", ifelse(yaxis >= 4, "black", "black")))
