@@ -1,4 +1,4 @@
-source("UpdatedAddFIMOtoMACS2NarrowPeaks.R")
+source("AddFIMOtoMACS2NarrowPeaks.R")
 #chrom1
 #if(!exists("tbl.narrowPeaks")){
 tbl.narrowPeaks <- read.table("ctcf__peaks.narrowPeak", sep="\t", as.is=TRUE)
