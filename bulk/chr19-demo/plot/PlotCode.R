@@ -1,3 +1,4 @@
+setwd("~/github/ChIPseqMotifMatch/bulk/chr19-demo")
 source("AddFIMOtoMACS2NarrowPeaks.R")
 tbl.narrowPeaks <- read.table("ctcf__peaks.narrowPeak", sep="\t", as.is=TRUE)
 
